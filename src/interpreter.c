@@ -5,23 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/21 21:44:11 by aihya             #+#    #+#             */
-/*   Updated: 2019/09/21 22:21:04 by aihya            ###   ########.fr       */
+/*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
+/*   Updated: 2019/09/22 21:49:35 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-int		ft_printf(const char * str)
+int		interpret_format(const char *format, va_list ap)
 {
-//	va_list	va;
+//	char	*s;
 
-//	va_start(ap, str);
-	while (*str)
+	ft_putendl(format);
+	(void)ap;
+/*	while ((s = va_arg(ap, char *)))
 	{
-		ft_putchar(*str);
-		str++;
-	}
-	return (0);
+		ft_putendl(s);
+	}*/
+	return (1);
 }
+
+

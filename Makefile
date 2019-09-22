@@ -6,13 +6,14 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/09/21 21:53:27 by aihya            ###   ########.fr        #
+#    Updated: 2019/09/22 21:32:59 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_printf
 
 SRC_NAME =	main.c \
+			ft_printf.c \
 			interpreter.c
 
 OBJ_NAME =	$(SRC_NAME:.c=.o)
