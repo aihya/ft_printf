@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/09/22 21:32:59 by aihya            ###   ########.fr        #
+#    Updated: 2019/09/26 12:15:17 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ OBJ_PATH =	obj
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-CFLAGS = -Wall \
-		 -Werror \
-		 -Wextra
+CFLAGS = #-Wall \
+		 #-Werror \
+		# -Wextra
 
 INCLUDE =	-Iinclude \
 			-Ilibft/include
@@ -44,6 +44,9 @@ libft_all:
 $(NAME): libft_all $(OBJ)
 	@echo "\033[1;33mCreating $(NAME)\033[0m"
 	@gcc $(OBJ) -o $@ -Llibft -lft
+
+run: all
+	@./$(NAME)
 
 clean :
 	@make -C libft clean

@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/09/22 21:49:35 by aihya            ###   ########.fr       */
+/*   Updated: 2019/09/26 13:00:46 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,27 @@
 
 int		interpret_format(const char *format, va_list ap)
 {
-//	char	*s;
+	int		i;
 
-	ft_putendl(format);
-	(void)ap;
-/*	while ((s = va_arg(ap, char *)))
+	i = 0;
+	while (format[i])
 	{
-		ft_putendl(s);
-	}*/
+		if (format[i] == '%')
+		{
+			
+		}
+		i++;
+	}
 	return (1);
 }
+/*
+t_fs	new_fs(const char *format, int start_index)
+{
+	int		i;
 
-
+	i = start_index;
+	while (format[i])
+	{
+		i++;
+	}
+}*/
