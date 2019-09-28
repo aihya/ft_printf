@@ -6,7 +6,7 @@
 /*   By: aihya <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 20:12:26 by aihya             #+#    #+#             */
-/*   Updated: 2018/10/28 15:20:09 by aihya            ###   ########.fr       */
+/*   Updated: 2019/09/28 16:30:11 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_atoi(const char *str)
 	while (ft_isdigit(s[len]))
 		len++;
 	if (len > 10 && sign == 1)
-		return (-1);
+		return (0);
 	if (len > 10 && sign == -1)
 		return (0);
 	n = 0;
