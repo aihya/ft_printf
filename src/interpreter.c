@@ -6,25 +6,80 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/09/28 18:20:56 by aihya            ###   ########.fr       */
+/*   Updated: 2019/09/29 19:03:35 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	repeate_char(char c, int i)
+{
+	int		j;
+
+	j = 0;
+	while (j < i && ++j)
+		ft_putchar(c);
+}
+
+void	print_modulo(t_fs *fs)
+{
+	if (fs->width > 1)
+	{
+		if (fs->flags & F_DASH)
+		{
+			ft_putchar(fs->specifier);
+			repeate_char(' ', fs->width - 1);
+		}
+		else if (fs->flags & F_ZERO)
+		{		
+			repeate_char('0', fs->width - 1);
+			ft_putchar(fs->specifier);
+		}
+		else if ((fs->flags & F_DASH) == 0)
+		{
+			repeate_char(' ', fs->width - 1);
+			ft_putchar(fs->specifier);
+		}
+	}
+	else
+		ft_putchar(fs->specifier);
+}
+
+void	print_c(t_fs *fs)
+{
+}
+
 int		interpret_format(const char *format, va_list ap)
 {
 	int		i;
+	int		j;
 	t_fs	*fs;
 
 	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%' && (fs = get_fs(format, i + 1)) != NULL)
+		if (format[i] == '%')
 		{
-			
+			fs = get_fs(format, i);
+			if (fs->specifier == '\0')
+				break ;
+			if (ft_strchr(SPECIFIERS, fs->specifier) == NULL)
+			{
+					i += fs->size;
+					free(fs);
+					continue ;
+			}
+			else if (fs->specifier == '%')
+				ft_putstr("ping");
+			else if (fs->specifier == 'c')
+				ft_putstr("PINNNG");
+			i += 1 + fs->size;
 		}
-		i++;
+		else
+		{
+			ft_putchar(format[i]);
+			i++;
+		}
 	}
 	return (1);
 }
@@ -35,7 +90,7 @@ t_fs	*init_fs()
 
 	fs = (t_fs *)malloc(sizeof(t_fs));
 	fs->flags = 0;
-	fs->width = 0;
+	fs->width = 1;
 	fs->precision = DEFAULT;
 	fs->length = 0;
 	fs->specifier = 0;
@@ -61,7 +116,6 @@ void	set_length(const char *format, int *i, t_fs *fs)
 		fs->length = L_L;
 		*i = *i + 1;
 	}
-	*i = *i - 1;
 }
 
 void	set_precision(const char *format, int *i, t_fs *fs)
@@ -82,21 +136,21 @@ void	set_precision(const char *format, int *i, t_fs *fs)
 		free(num_string);
 		*i = *i + j;
 	}
-	*i = *i - 1;
 }
 
-void	set_flags(char c, t_fs *fs)
+void	set_flags(const char *format, int *i, t_fs *fs)
 {
-	if (c == ' ')
+	if (format[*i] == ' ')
 		fs->flags |= F_SPACE;
-	else if (c == '+')
+	else if (format[*i] == '+')
 		fs->flags |= F_PLUS;
-	else if (c == '-')
+	else if (format[*i] == '-')
 		fs->flags |= F_DASH;
-	else if (c == '0')
+	else if (format[*i] == '0')
 		fs->flags |= F_ZERO;
-	else if (c == '#')
+	else if (format[*i] == '#')
 		fs->flags |= F_HTAG;
+	*i = *i + 1;
 }
 
 void	set_width(const char *format, int *i, t_fs *fs)
@@ -117,34 +171,24 @@ t_fs	*get_fs(const char *format, int start_index)
 {
 	int		i;
 	t_fs	*fs;
-	int		false_fs;
 
-	false_fs = 0;
-	i = start_index;
+	i = start_index + 1;
 	fs = init_fs();
-	while (format[i])
+	fs->size = i;
+	while (ft_strchr(ALL, format[i]))
 	{
+	ft_putchar(format[i]);
+	ft_putchar('\n');
 		if (ft_strchr(LENGTHS, format[i]))
 			set_length(format, &i, fs);
-		else if (ft_strchr(SPECIFIERS, format[i]))
-		{
-			fs->specifier = format[i];
-			break ;
-		}
 		else if (format[i] == '.')
 			set_precision(format, &i, fs);
 		else if (ft_strchr(FLAGS, format[i]))
-			set_flags(format[i], fs);
+			set_flags(format, &i, fs);
 		else if (ft_strchr(NUMBERS, format[i]))
 			set_width(format, &i, fs);
-		else if ((false_fs = 1))
-			break ;
-		i++;
 	}
-	if (false_fs)
-	{
-		free(fs);
-		return (NULL);
-	}
+	fs->specifier = format[i];
+	fs->size = (i - fs->size) + 1;
 	return (fs);
 }

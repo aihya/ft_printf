@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 21:29:07 by aihya             #+#    #+#             */
-/*   Updated: 2019/09/28 17:59:35 by aihya            ###   ########.fr       */
+/*   Updated: 2019/09/29 18:58:48 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define LENGTHS	"hlL"
 # define FLAGS		"#0-+ "
 # define NUMBERS	"0123456789"
+# define ALL		"01234567893#-+ hlL."
 
 # define F_HTAG		1
 # define F_ZERO		2
