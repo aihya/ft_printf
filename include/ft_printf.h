@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 21:29:07 by aihya             #+#    #+#             */
-/*   Updated: 2019/09/29 18:58:48 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/01 14:58:49 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_fs
 	int				size;
 }				t_fs;
 
+void	print(t_fs *fs);
 int		ft_printf(const char *format, ...);
 int		interpret_format(const char *format, va_list ap);
 t_fs	*get_fs(const char *format, int start_index);

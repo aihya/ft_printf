@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/09/29 19:03:35 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/01 15:36:58 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	repeate_char(char c, int i)
 		ft_putchar(c);
 }
 
-void	print_modulo(t_fs *fs)
+void	print_non_specifier(t_fs *fs)
 {
 	if (fs->width > 1)
 	{
@@ -31,11 +31,11 @@ void	print_modulo(t_fs *fs)
 			repeate_char(' ', fs->width - 1);
 		}
 		else if (fs->flags & F_ZERO)
-		{		
+		{
 			repeate_char('0', fs->width - 1);
 			ft_putchar(fs->specifier);
 		}
-		else if ((fs->flags & F_DASH) == 0)
+		else if ((fs->flags & F_ZERO) == 0)
 		{
 			repeate_char(' ', fs->width - 1);
 			ft_putchar(fs->specifier);
@@ -54,23 +54,28 @@ int		interpret_format(const char *format, va_list ap)
 	int		i;
 	int		j;
 	t_fs	*fs;
-
+	
 	i = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			fs = get_fs(format, i);
-			if (fs->specifier == '\0')
-				break ;
-			if (ft_strchr(SPECIFIERS, fs->specifier) == NULL)
+			if (fs->specifier == '\0' || fs->specifier == '%' || ft_strchr(SPECIFIERS, fs->specifier) == NULL)
 			{
-					i += fs->size;
+				if (fs->specifier != '\0')
+				{
+					print_non_specifier(fs);
+					i += fs->size + 1;
+				}
+				else
+				{
 					free(fs);
-					continue ;
+					break ;
+				}
+				free(fs);
+				continue ;
 			}
-			else if (fs->specifier == '%')
-				ft_putstr("ping");
 			else if (fs->specifier == 'c')
 				ft_putstr("PINNNG");
 			i += 1 + fs->size;
@@ -164,7 +169,7 @@ void	set_width(const char *format, int *i, t_fs *fs)
 	num_string = ft_strsub(format, *i, j);
 	fs->width = ft_atoi(num_string);
 	free(num_string);
-	*i = (*i + j) - 1;
+	*i = (*i + j);
 }
 
 t_fs	*get_fs(const char *format, int start_index)
@@ -175,10 +180,8 @@ t_fs	*get_fs(const char *format, int start_index)
 	i = start_index + 1;
 	fs = init_fs();
 	fs->size = i;
-	while (ft_strchr(ALL, format[i]))
+	while (format[i] && ft_strchr(ALL, format[i]))
 	{
-	ft_putchar(format[i]);
-	ft_putchar('\n');
 		if (ft_strchr(LENGTHS, format[i]))
 			set_length(format, &i, fs);
 		else if (format[i] == '.')
