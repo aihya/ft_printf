@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/01 15:36:58 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/02 22:24:54 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,65 @@ void	repeate_char(char c, int i)
 		ft_putchar(c);
 }
 
-void	print_non_specifier(t_fs *fs)
+void	ft_putstr_to(const char *str, int size)
+{
+	if (size < 0 || size > ft_strlen(str))
+		ft_putstr(str);
+	else
+		write(1, str, size);
+}
+
+void	print_non_specifier(t_fs *fs, int c)
 {
 	if (fs->width > 1)
 	{
 		if (fs->flags & F_DASH)
 		{
-			ft_putchar(fs->specifier);
+			ft_putchar(c);
 			repeate_char(' ', fs->width - 1);
 		}
 		else if (fs->flags & F_ZERO)
 		{
 			repeate_char('0', fs->width - 1);
-			ft_putchar(fs->specifier);
+			ft_putchar(c);
 		}
 		else if ((fs->flags & F_ZERO) == 0)
 		{
 			repeate_char(' ', fs->width - 1);
-			ft_putchar(fs->specifier);
+			ft_putchar(c);
 		}
 	}
 	else
-		ft_putchar(fs->specifier);
+		ft_putchar(c);
 }
 
-void	print_c(t_fs *fs)
+void	print_c(t_fs *fs, va_list ap)
 {
+	char	c;
+
+	c = va_arg(ap, int);
+	print_non_specifier(fs, c);
+}
+
+void	print_s(t_fs *fs, va_list ap)
+{
+	char	*s;
+	int		size;
+
+	s = va_arg(ap, char *);
+	size = (int)ft_strlen(s);
+	if (fs->width > size)
+	{
+		if (fs->flags & F_DASH)
+		{
+			ft_putstr_to(s, fs->precision);
+			if (size < fs->precision)
+			{
+				repeate_char(' ', fs->);
+			}
+		}
+	}
+	
 }
 
 int		interpret_format(const char *format, va_list ap)
@@ -54,19 +87,19 @@ int		interpret_format(const char *format, va_list ap)
 	int		i;
 	int		j;
 	t_fs	*fs;
-	
+
 	i = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			fs = get_fs(format, i);
-			if (fs->specifier == '\0' || fs->specifier == '%' || ft_strchr(SPECIFIERS, fs->specifier) == NULL)
+			if (fs->specifier == '\0' || ft_strchr(SPECIFIERS, fs->specifier) == NULL)
 			{
 				if (fs->specifier != '\0')
 				{
-					print_non_specifier(fs);
-					i += fs->size + 1;
+					print_non_specifier(fs, fs->specifier);
+					i += 1 + fs->size;
 				}
 				else
 				{
@@ -77,7 +110,7 @@ int		interpret_format(const char *format, va_list ap)
 				continue ;
 			}
 			else if (fs->specifier == 'c')
-				ft_putstr("PINNNG");
+				print_c(fs, ap);
 			i += 1 + fs->size;
 		}
 		else
@@ -106,7 +139,7 @@ t_fs	*init_fs()
 void	set_length(const char *format, int *i, t_fs *fs)
 {
 	if ((format[*i] == 'h' && format[*i + 1] && format[*i + 1] == 'h')
-	||	(format[*i] == 'l' && format[*i + 1] && format[*i + 1] == 'l'))
+			||	(format[*i] == 'l' && format[*i + 1] && format[*i + 1] == 'l'))
 	{
 		fs->length = format[*i] == 'h' ? L_hh : L_ll;
 		*i += 2;
@@ -194,4 +227,4 @@ t_fs	*get_fs(const char *format, int start_index)
 	fs->specifier = format[i];
 	fs->size = (i - fs->size) + 1;
 	return (fs);
-}
+}      

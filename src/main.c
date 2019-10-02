@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 20:54:13 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/01 15:38:12 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/02 20:35:48 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	print(t_fs *fs)
 
 int		main(void)
 {
-	printf("[%5%]", NULL);
-	ft_printf("{%5%}");
+	printf("[%010.0s]\n", "lol");
+	ft_printf("{%50c}\n", 67);
+
 	
 //	printf("%d\n", ft_atoi("-5000"));
 //	print(get_fs("%%", 1));
