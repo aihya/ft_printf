@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/02 22:24:54 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/02 22:57:07 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,14 @@ void	print_s(t_fs *fs, va_list ap)
 	{
 		if (fs->flags & F_DASH)
 		{
-			ft_putstr_to(s, fs->precision);
-			if (size < fs->precision)
-			{
-				repeate_char(' ', fs->);
-			}
+/*			ft_putstr_to(s, fs->precision);
+			if (size > fs->precision)
+				repeate_char(' ', );
+*/		}
+		else (fs->flags & F_ZERO)
+		{
+			repeate_char('0', fs->width - size);
+			ft_putstr_to(str, fs->precision);
 		}
 	}
 	
