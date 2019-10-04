@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/02 22:57:07 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/04 13:08:34 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,32 @@ void	print_s(t_fs *fs, va_list ap)
 	{
 		if (fs->flags & F_DASH)
 		{
-/*			ft_putstr_to(s, fs->precision);
-			if (size > fs->precision)
-				repeate_char(' ', );
-*/		}
-		else (fs->flags & F_ZERO)
+			if (fs->precision == -1 || fs->precision >= size)
+			{
+				ft_putstr_to(s, size);
+				repeate_char(' ', fs->width - size);
+			}
+			else if (fs->precision < size)
+			{
+				ft_putstr_to(s, fs->precision);
+				repeate_char(' ', fs->width - fs->precision);
+			}
+		}
+		else if  (fs->flags & F_ZERO)
 		{
-			repeate_char('0', fs->width - size);
-			ft_putstr_to(str, fs->precision);
+			if (fs->precision == -1 || fs->precision >= size)
+			{
+				repeate_char('0', fs->width - size);
+				ft_putstr_to(s, size);
+			}
+			else if (fs->precision < size)
+			{
+				repeate_char('0', fs->width - fs->precision);
+				ft_putstr_to(s, fs->precision);
+			}
 		}
 	}
-	
+
 }
 
 int		interpret_format(const char *format, va_list ap)
@@ -114,6 +129,8 @@ int		interpret_format(const char *format, va_list ap)
 			}
 			else if (fs->specifier == 'c')
 				print_c(fs, ap);
+			else if (fs->specifier == 's')
+				print_s(fs, ap);
 			i += 1 + fs->size;
 		}
 		else
