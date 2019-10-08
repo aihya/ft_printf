@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 23:15:26 by aihya             #+#    #+#             */
-/*   Updated: 2019/07/28 15:58:37 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/06 11:57:19 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define BEGINING 0
 # define LAST_POS -1
 
+
+void        ft_putstr_to(const char *str, int size);
 char		*ft_strappend(char **a_s1, char c, int overwrite);
 int			ft_isalphanumeric(char c);
 void		ft_print_chain(char ***a_chain, char *del);

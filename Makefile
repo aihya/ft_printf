@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/09/26 12:15:17 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/06 11:55:16 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ NAME = ft_printf
 
 SRC_NAME =	main.c \
 			ft_printf.c \
-			interpreter.c
+			interpreter.c \
+			print_non_specifier.c \
+			print_c.c \
+			print_s.c
 
 OBJ_NAME =	$(SRC_NAME:.c=.o)
 

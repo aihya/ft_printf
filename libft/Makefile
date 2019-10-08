@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/28 16:28:57 by aihya             #+#    #+#              #
-#    Updated: 2019/07/29 18:47:09 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/06 11:56:41 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_NAME =	ft_abs.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isalphanumeric.c \
+			ft_putstr_to.c \
 			ft_isascii.c \
 			ft_isdigit.c \
 			ft_isprint.c \
