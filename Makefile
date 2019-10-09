@@ -6,18 +6,19 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/10/06 11:55:16 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/09 18:50:20 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
 
-SRC_NAME =	main.c \
-			ft_printf.c \
+SRC_NAME =	ft_printf.c \
 			interpreter.c \
 			print_non_specifier.c \
 			print_c.c \
-			print_s.c
+			print_s.c \
+			print_p.c \
+			print_o.c
 
 OBJ_NAME =	$(SRC_NAME:.c=.o)
 
@@ -46,7 +47,8 @@ libft_all:
 
 $(NAME): libft_all $(OBJ)
 	@echo "\033[1;33mCreating $(NAME)\033[0m"
-	@gcc $(OBJ) -o $@ -Llibft -lft
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 run: all
 	@./$(NAME)

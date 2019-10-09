@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 20:54:13 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/06 11:43:50 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/09 22:53:03 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	print(t_fs *fs)
 
 int		main(void)
 {
-	printf("[%020.1s]\n", "lol");
-	ft_printf("{%020.1s}\n", "lol");
+	char	*s;
 
-	
+	s = ft_strdup("");
+	printf("[%-#10o]\n", 5000);
+	ft_printf("{%-#10o}\n", 5000);
+
 //	printf("%d\n", ft_atoi("-5000"));
 //	print(get_fs("%%", 1));
 //	ft_printf("%l%o%l\n");

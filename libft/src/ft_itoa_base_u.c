@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base_u.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/18 20:10:41 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/08 17:52:58 by aihya            ###   ########.fr       */
+/*   Created: 2019/10/08 17:44:26 by aihya             #+#    #+#             */
+/*   Updated: 2019/10/08 17:56:44 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,36 @@
 #define UPPER_CASE	"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 #define LOWER_CASE	"0123456789abcdefghijklmnopqrstuvwxyz"
 
-long long	ll_abs(long long n)
+static char	*convert_to_base(unsigned long long value, unsigned base, int cap)
 {
-	return (n >= 0 ? n : (-1) * n);
-}
-
-static char	*convert_to_base(long long value, int base, int cap)
-{
-	int			i;
-	int			sign;
-	char		buffer[66];
-	long long	n;
-	char		*base_conv_chars;
+	int					i;
+	char				buffer[66];
+	unsigned long long	n;
+	char				*base_conv_chars;
 
 	base_conv_chars = ft_strdup(cap == 1 ? UPPER_CASE : LOWER_CASE);
 	n = value;
-	sign = 0;
-	if (sign > 0)
-		sign = 1;
 	i = 0;
-	while (n == LLONG_MIN || ll_abs(n) >= base)
+	while (n >= base)
 	{
-		buffer[i] = base_conv_chars[ll_abs(n % base)];
+		buffer[i] = base_conv_chars[n % base];
 		n = n / base;
 		i++;
 	}
-	buffer[i++] = base_conv_chars[ll_abs(n)];
-	if (sign == 1)
-		buffer[i++] = '-';
+	buffer[i++] = base_conv_chars[n];
 	buffer[i] = '\0';
 	free(base_conv_chars);
 	return (ft_strdup(buffer));
 }
 
-char		*ft_itoa_base(long long value, int base, int cap)
+char		*ft_itoa_base_u(unsigned long long value, int base, int cap)
 {
 	char	*res;
 	char	*buffer;
 	int		len;
 	int		j;
 
-	buffer = convert_to_base(value, base, cap);
+	buffer = convert_to_base(value, (unsigned)base, cap);
 	len = (int)ft_strlen(buffer);
 	res = (char *)malloc(sizeof(char) * (len + 1));
 	len--;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_s.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/08 15:06:59 by aihya             #+#    #+#             */
+/*   Updated: 2019/10/09 19:47:50 by aihya            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void	print_s_on_dash(t_fs *fs, char *s, int size)
+void	print_s_on_left(t_fs *fs, char *s, int size)
 {
 	if (fs->precision == -1 || fs->precision >= size)
 	{
@@ -14,7 +26,7 @@ void	print_s_on_dash(t_fs *fs, char *s, int size)
 	}
 }
 
-void	print_s_on_zero(t_fs *fs, char *s, int size, char sym)
+void	print_s_on_right(t_fs *fs, char *s, int size, char sym)
 {
 	if (fs->precision == -1 || fs->precision >= size)
 	{
@@ -30,22 +42,26 @@ void	print_s_on_zero(t_fs *fs, char *s, int size, char sym)
 
 void	print_s(t_fs *fs, va_list ap)
 {
+	int		null;
 	char	*s;
 	int		size;
 
+	null = 0;
 	s = va_arg(ap, char *);
-	size = (int)ft_strlen(s);
-	if (fs->width > size)
-	{
-		if (fs->flags & F_DASH)
-			print_s_on_dash(fs, s, size);
-		else if (fs->flags & F_ZERO)
-			print_s_on_zero(fs, s, size, 48);
-		else
-			print_s_on_zero(fs, s, size, 32);
-	}
+	if (s != NULL)
+		size = (int)ft_strlen(s);
 	else
 	{
-		
+		null = 1;
+		s = ft_strdup("(null)");
+		size = 6;
 	}
+	if (fs->flags & F_DASH)
+		print_s_on_left(fs, s, size);
+	else if (fs->flags & F_ZERO)
+		print_s_on_right(fs, s, size, 48);
+	else
+		print_s_on_right(fs, s, size, 32);
+	if (null)
+		free(s);
 }

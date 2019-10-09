@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/06 11:52:00 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/09 19:36:22 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	repeate_char(char c, int i)
 	int		j;
 
 	j = 0;
-	while (j < i && ++j)
+	while (j < i)
+	{
 		ft_putchar(c);
+		j++;
+	}
 }
 
 int		interpret_format(const char *format, va_list ap)
@@ -28,12 +31,12 @@ int		interpret_format(const char *format, va_list ap)
 	t_fs	*fs;
 
 	i = 0;
-	while (format[i])
+	while (format != NULL && format[i])
 	{
 		if (format[i] == '%')
 		{
 			fs = get_fs(format, i);
-			if (fs->specifier == '\0' || ft_strchr(SPECIFIERS, fs->specifier) == NULL)
+			if (fs->specifier == '\0' || fs->specifier == '%' || ft_strchr(SPECIFIERS, fs->specifier) == NULL)
 			{
 				if (fs->specifier != '\0')
 				{
@@ -52,6 +55,10 @@ int		interpret_format(const char *format, va_list ap)
 				print_c(fs, ap);
 			else if (fs->specifier == 's')
 				print_s(fs, ap);
+			else if (fs->specifier == 'p')
+				print_p(fs, ap);
+			else if (fs->specifier == 'o')
+				print_o(fs, ap);
 			i += 1 + fs->size;
 		}
 		else
@@ -60,7 +67,7 @@ int		interpret_format(const char *format, va_list ap)
 			i++;
 		}
 	}
-	return (1);
+	return (i);
 }
 
 t_fs	*init_fs()
@@ -69,7 +76,7 @@ t_fs	*init_fs()
 
 	fs = (t_fs *)malloc(sizeof(t_fs));
 	fs->flags = 0;
-	fs->width = 1;
+	fs->width = 0;
 	fs->precision = DEFAULT;
 	fs->length = 0;
 	fs->specifier = 0;

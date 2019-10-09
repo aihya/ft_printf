@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 23:15:26 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/06 11:57:19 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/08 17:48:26 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void		ft_putstr(char const *s);
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_bzero(void *s, size_t n);
 char		*ft_itoa(int n);
-char		*ft_itoa_base(long long value, int base);
+char		*ft_itoa_base(long long value, int base, int cap);
+char		*ft_itoa_base_u(unsigned long long value, int base, int cap);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
