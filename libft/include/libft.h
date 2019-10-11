@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 23:15:26 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/08 17:48:26 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/11 21:01:34 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define BEGINING 0
 # define LAST_POS -1
 
-
+int			ft_max(int a, int b);
 void        ft_putstr_to(const char *str, int size);
 char		*ft_strappend(char **a_s1, char c, int overwrite);
 int			ft_isalphanumeric(char c);

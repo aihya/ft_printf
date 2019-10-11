@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 21:29:07 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/08 19:45:56 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/11 22:53:23 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
-# include "libft.h"
+# include "../libft/include/libft.h"
 
 # define DEFAULT	-1
 # define SPECIFIERS	"cspdiouxXf%"
@@ -51,11 +51,12 @@ void	print(t_fs *fs);
 int		ft_printf(const char *format, ...);
 int		interpret_format(const char *format, va_list ap);
 t_fs	*get_fs(const char *format, int start_index);
-void	repeate_char(char c, int i);
-void	print_s(t_fs *fs, va_list ap);
-void	print_c(t_fs *fs, va_list ap);
-void	print_p(t_fs *fs, va_list ap);
-void    print_o(t_fs *fs, va_list ap);
-void	print_non_specifier(t_fs *fs, int c);
+int		repeate_char(char c, int i);
+int		print_s(t_fs *fs, va_list ap);
+int		print_c(t_fs *fs, va_list ap);
+int		print_p(t_fs *fs, va_list ap);
+int		print_o(t_fs *fs, va_list ap);
+void	print_x(t_fs *fs, va_list ap);
+int		print_non_specifier(t_fs *fs, int c);
 
 #endif

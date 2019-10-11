@@ -6,13 +6,13 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/09 19:36:22 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/11 22:54:15 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
-void	repeate_char(char c, int i)
+int		repeate_char(char c, int i)
 {
 	int		j;
 
@@ -22,6 +22,7 @@ void	repeate_char(char c, int i)
 		ft_putchar(c);
 		j++;
 	}
+	return (j);
 }
 
 int		interpret_format(const char *format, va_list ap)
@@ -29,8 +30,10 @@ int		interpret_format(const char *format, va_list ap)
 	int		i;
 	int		j;
 	t_fs	*fs;
+	int		size;
 
 	i = 0;
+	size = 0;
 	while (format != NULL && format[i])
 	{
 		if (format[i] == '%')
@@ -40,7 +43,7 @@ int		interpret_format(const char *format, va_list ap)
 			{
 				if (fs->specifier != '\0')
 				{
-					print_non_specifier(fs, fs->specifier);
+					size += print_non_specifier(fs, fs->specifier);
 					i += 1 + fs->size;
 				}
 				else
@@ -52,22 +55,25 @@ int		interpret_format(const char *format, va_list ap)
 				continue ;
 			}
 			else if (fs->specifier == 'c')
-				print_c(fs, ap);
+				size += print_c(fs, ap);
 			else if (fs->specifier == 's')
-				print_s(fs, ap);
+				size += print_s(fs, ap);
 			else if (fs->specifier == 'p')
-				print_p(fs, ap);
+				size += print_p(fs, ap);
 			else if (fs->specifier == 'o')
-				print_o(fs, ap);
+				size += print_o(fs, ap);
+			else if (fs->specifier == 'x')
+				print_x(fs, ap);
 			i += 1 + fs->size;
 		}
 		else
 		{
 			ft_putchar(format[i]);
 			i++;
+			size++;
 		}
 	}
-	return (i);
+	return (size);
 }
 
 t_fs	*init_fs()

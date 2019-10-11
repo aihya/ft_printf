@@ -6,16 +6,16 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:06:48 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/08 15:06:51 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/11 15:31:56 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
-void	print_c(t_fs *fs, va_list ap)
+int		print_c(t_fs *fs, va_list ap)
 {
 	char	c;
 
 	c = va_arg(ap, int);
-	print_non_specifier(fs, c);
+	return (print_non_specifier(fs, c));
 }

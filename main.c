@@ -6,11 +6,11 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 20:54:13 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/09 22:53:03 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/11 22:55:38 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "./include/ft_printf.h"
 
 void	print(t_fs *fs)
 {
@@ -24,11 +24,8 @@ void	print(t_fs *fs)
 
 int		main(void)
 {
-	char	*s;
-
-	s = ft_strdup("");
-	printf("[%-#10o]\n", 5000);
-	ft_printf("{%-#10o}\n", 5000);
+	printf("1: %d\n", printf("%23.5o|%-23.5o|%#23.5o|%023.5o\n", 0U, 0U, 0U, 0U));
+	printf("2: %d\n", ft_printf("%23.5o|%-23.5o|%#23.5o|%023.5o\n", 0U, 0U, 0U, 0U));
 
 //	printf("%d\n", ft_atoi("-5000"));
 //	print(get_fs("%%", 1));

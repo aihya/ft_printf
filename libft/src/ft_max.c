@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aihya <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/05 15:09:27 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/10 19:11:08 by aihya            ###   ########.fr       */
+/*   Created: 2019/10/11 21:00:04 by aihya             #+#    #+#             */
+/*   Updated: 2019/10/11 21:01:09 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int		ft_max(int a, int b)
 {
-	size_t	i;
-
-	i = 0;
-	if (s != NULL)
-	{
-		while (*s++ && ++i)
-			;
-	}
-	return (i);
+	return (a >= b ? a : b);
 }

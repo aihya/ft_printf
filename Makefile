@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/10/09 18:50:20 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/11 16:42:42 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,19 @@ SRC_NAME =	ft_printf.c \
 			print_c.c \
 			print_s.c \
 			print_p.c \
-			print_o.c
+			print_o.c \
+			print_x.c \
+	#		ft_atoi.c \
+			ft_itoa_base.c \
+			ft_itoa_base_u.c \
+			ft_putchar.c \
+			ft_putstr.c \
+			ft_putstr_to.c \
+			ft_strchr.c \
+			ft_strdup.c \
+			ft_strjoin.c \
+			ft_strlen.c \
+			ft_strsub.c
 
 OBJ_NAME =	$(SRC_NAME:.c=.o)
 
@@ -32,26 +44,20 @@ CFLAGS = #-Wall \
 		 #-Werror \
 		# -Wextra
 
-INCLUDE =	-Iinclude \
-			-Ilibft/include
-
 all : $(NAME)
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@echo "Compiling \033[1;33m[$<]\033[0m to \033[1;32m[$@]\033[0m"
-	@gcc $(CFLAGS) $(INCLUDE) -o $@ -c $<
+	@gcc $(CFLAGS) -o $@ -c $<
 
 libft_all:
 	@make -C libft
 
 $(NAME): libft_all $(OBJ)
 	@echo "\033[1;33mCreating $(NAME)\033[0m"
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
-
-run: all
-	@./$(NAME)
+	@ar rc $(NAME) $(OBJ) libft/obj/*.o
+	@ranlib $(NAME)
 
 clean :
 	@make -C libft clean

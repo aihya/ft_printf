@@ -1,76 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_o.c                                          :+:      :+:    :+:   */
+/*   print_x.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 16:59:11 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/11 22:58:16 by aihya            ###   ########.fr       */
+/*   Created: 2019/10/10 20:41:54 by aihya             #+#    #+#             */
+/*   Updated: 2019/10/10 22:38:45 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	prefix(char *str, char *prefix)
+void	print_x_on_right(t_fs *fs, char *s, int size)
 {
-	ft_putstr(prefix);
-	ft_putstr(str);
-}
-
-int		print_o_on_right(t_fs *fs, char *s, int size)
-{
-	int		ret;
-
-	ret = 0;
 	if (fs->precision != DEFAULT)
 	{
 		if (fs->precision >= fs->width)
 		{
-			ret = repeate_char(48, fs->precision - size);
+			repeate_char(48, fs->precision - size);
 			ft_putstr(s);
 		}
 		else if (fs->precision >= size)
 		{
-			ret = repeate_char(32, fs->width - fs->precision);
-			ret += repeate_char(48, fs->precision - size);
+			repeate_char(32, fs->width - fs->precision);
+			repeate_char(48, fs->precision - size);
 			ft_putstr(s);
 		}
 		else
 		{
-			ret = repeate_char(32, fs->width - size);
+			repeate_char(32, fs->width - size);
 			ft_putstr(s);
 		}
 	}
 	else
-	{		
-		ret = repeate_char(fs->flags & F_ZERO ? 48 : 32, fs->width - size);
+	{
+		repeate_char(fs->flags & F_ZERO ? 48 : 32, fs->width - size);
 		ft_putstr(s);
 	}
-	return (ret + size);
 }
 
-int		print_o_on_left(t_fs *fs, char *s, int size)
+void	print_x_on_left(t_fs *fs, char *s, int size)
 {
-	int		ret;
-
-	ret = repeate_char(48, fs->precision - size);
+	repeate_char(48, fs->precision - size);
 	if (fs->precision >= fs->width)
 		ft_putstr(s);
 	else if (fs->precision > size)
 	{
 		ft_putstr(s);
-		ret += repeate_char(32, fs->width - fs->precision);
+		repeate_char(32, fs->width - fs->precision);
 	}
 	else
 	{
 		ft_putstr(s);
-		ret += repeate_char(32, fs->width - size);
+		repeate_char(32, fs->width - size);
 	}
-	return (ret + size);
 }
 
-char	*get_s(unsigned long long int val, t_fs *fs)
+static char	*get_s(unsigned long long int val, t_fs *fs)
 {
 	char	*s;
 	char	*tmp;
@@ -83,10 +70,10 @@ char	*get_s(unsigned long long int val, t_fs *fs)
 			s = ft_strdup("0");
 	}
 	else
-		s = ft_itoa_base_u(val, 8, 0);	
+		s = ft_itoa_base_u(val, 16, 0);
 	if (fs->flags & F_HTAG)
 	{
-		tmp = ft_strjoin("0", s);
+		tmp = ft_strjoin("0x", s);
 		free(s);
 		s = ft_strdup(tmp);
 		free(tmp);
@@ -94,15 +81,13 @@ char	*get_s(unsigned long long int val, t_fs *fs)
 	return (s);
 }
 
-int		print_o(t_fs *fs, va_list ap)
+void	print_x(t_fs *fs, va_list ap)
 {
 	unsigned long long int	val;
 	char					*s;
 	char					*tmp;
 	int						size;
-	int						ret;
 
-	ret = 0;
 	if (fs->length == L_hh)
 		val = (unsigned char)va_arg(ap, int);
 	else if (fs->length == L_h)
@@ -116,9 +101,9 @@ int		print_o(t_fs *fs, va_list ap)
 	s = get_s(val, fs);
 	size = (int)ft_strlen(s);
 	if (fs->flags & F_DASH)
-		ret = print_o_on_left(fs, s, size);
+		print_x_on_left(fs, s, size);
 	else
-		ret = print_o_on_right(fs, s, size);
+		print_x_on_right(fs, s, size);
 	free(s);
-	return (ret);
 }
+

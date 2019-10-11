@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/28 16:28:57 by aihya             #+#    #+#              #
-#    Updated: 2019/10/08 17:48:42 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/11 21:02:02 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 
 NAME = libft.a
 
-SRC_NAME =	ft_abs.c \
+SRC_NAME =	ft_max.c \
+			ft_abs.c \
 			ft_atoi.c \
 			ft_begins_with.c \
 			ft_bzero.c \
