@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 16:59:11 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/11 22:58:16 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/13 13:19:37 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,24 @@ int		print_o_on_right(t_fs *fs, char *s, int size)
 	{
 		if (fs->precision >= fs->width)
 		{
-			ret = repeate_char(48, fs->precision - size);
+			ret += repeate_char(48, fs->precision - size);
 			ft_putstr(s);
 		}
 		else if (fs->precision >= size)
 		{
-			ret = repeate_char(32, fs->width - fs->precision);
+			ret += repeate_char(32, fs->width - fs->precision);
 			ret += repeate_char(48, fs->precision - size);
 			ft_putstr(s);
 		}
 		else
 		{
-			ret = repeate_char(32, fs->width - size);
+			ret += repeate_char(32, fs->width - size);
 			ft_putstr(s);
 		}
 	}
 	else
 	{		
-		ret = repeate_char(fs->flags & F_ZERO ? 48 : 32, fs->width - size);
+		ret += repeate_char(fs->flags & F_ZERO ? 48 : 32, fs->width - size);
 		ft_putstr(s);
 	}
 	return (ret + size);

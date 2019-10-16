@@ -6,11 +6,12 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 20:54:13 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/11 22:55:38 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/16 22:55:11 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/ft_printf.h"
+#include <limits.h>
 
 void	print(t_fs *fs)
 {
@@ -24,8 +25,8 @@ void	print(t_fs *fs)
 
 int		main(void)
 {
-	printf("1: %d\n", printf("%23.5o|%-23.5o|%#23.5o|%023.5o\n", 0U, 0U, 0U, 0U));
-	printf("2: %d\n", ft_printf("%23.5o|%-23.5o|%#23.5o|%023.5o\n", 0U, 0U, 0U, 0U));
+	printf(" - %d\n", ft_printf("%-#50.20x", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX));
+	printf(" - %d\n", printf("%-#50.20x", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX));
 
 //	printf("%d\n", ft_atoi("-5000"));
 //	print(get_fs("%%", 1));

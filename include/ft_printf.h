@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 21:29:07 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/11 22:53:23 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/12 15:52:32 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		print_s(t_fs *fs, va_list ap);
 int		print_c(t_fs *fs, va_list ap);
 int		print_p(t_fs *fs, va_list ap);
 int		print_o(t_fs *fs, va_list ap);
-void	print_x(t_fs *fs, va_list ap);
+int		print_x(t_fs *fs, va_list ap);
 int		print_non_specifier(t_fs *fs, int c);
 
 #endif

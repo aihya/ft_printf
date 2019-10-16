@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/28 16:28:57 by aihya             #+#    #+#              #
-#    Updated: 2019/10/11 21:02:02 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/16 20:50:54 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ all : $(NAME)
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2>/dev/null || true
-	@echo "Compiling \033[1;33m[$<]\033[0m to \033[1;32m[$@]\033[0m"
+	@echo "\033[1m[$<]\033[0m => \033[1;32m[$@]\033[0m"
 	@gcc $(CFLAGS) -I include -o $@ -c $<
 
 $(NAME) : $(OBJ)
