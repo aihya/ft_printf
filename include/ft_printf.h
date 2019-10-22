@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 21:29:07 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/12 15:52:32 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 18:40:36 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ int		print_p(t_fs *fs, va_list ap);
 int		print_o(t_fs *fs, va_list ap);
 int		print_x(t_fs *fs, va_list ap);
 int		print_non_specifier(t_fs *fs, int c);
+int		put_x(int htag_condition, int size, int add_zeros, char *s);
+int		put_trailing_spaces(t_fs *fs, int condition, int comp_target);
+int		set_x_right_prefix(int val, t_fs *fs, int comp_target, int dp);
 
 #endif

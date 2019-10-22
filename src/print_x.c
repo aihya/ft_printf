@@ -6,41 +6,13 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 20:41:54 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/16 22:55:25 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 18:40:13 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int		set_x_right_prefix(int val, t_fs *fs, int comp_target, int dp)
-{
-	int		ret;
-
-	ret = 0;
-	if (val != 0 && (fs->flags & F_HTAG))
-	{
-		if (dp == DEFAULT && (fs->flags & F_ZERO))
-		{
-			ft_putstr("0x");
-			ret += repeate_char(48, fs->width - comp_target - 2) + 2;
-		}
-		else
-		{
-			ret += repeate_char(32, fs->width - comp_target - 2) + 2;
-			ft_putstr("0x");
-		}
-	}
-	else
-	{
-		if (dp == DEFAULT && (fs->flags & F_ZERO))
-			ret += repeate_char(48, fs->width - comp_target);
-		else
-			ret += repeate_char(32, fs->width - comp_target);
-	}
-	return (ret);
-}
-
-int		print_x_on_right(t_fs *fs, char *s, int size, int val)
+static int	print_x_on_right(t_fs *fs, char *s, int size, int val)
 {
 	int		ret;
 
@@ -51,90 +23,46 @@ int		print_x_on_right(t_fs *fs, char *s, int size, int val)
 		{
 			ret += set_x_right_prefix(val, fs, fs->precision, 0);
 			ret += repeate_char(48, fs->precision - size);
-			ft_putstr(s);
 		}
 		else if (fs->precision >= size)
 		{
 			ret += set_x_right_prefix(val, fs, fs->precision, 0);
 			ret += repeate_char(48, fs->precision - size);
-			ft_putstr(s);
 		}
 		else
-		{
 			ret += set_x_right_prefix(val, fs, size, 0);
-			ft_putstr(s);
-		}
 	}
 	else
-	{
 		ret += set_x_right_prefix(val, fs, size, DEFAULT);
-		ft_putstr(s);
-	}
+	ft_putstr(s);
 	return (ret + size);
 }
 
-int		set_x_left_prefix(int val, t_fs *fs, int comp_target, int dp)
+static int	print_x_on_left(t_fs *fs, char *s, int size, int val)
 {
 	int		ret;
+	int		htag_cond;
 
 	ret = 0;
-	if (val != 0 && (fs->flags & F_HTAG))
-	{
-		ft_putstr("0x");
-		if (dp != DEFAULT)
-		{
-			ret += repeate_char(48, fs->width - comp_target - 2) + 2;
-		}
-	}
-	return (ret);
-}
-int		print_x_on_left(t_fs *fs, char *s, int size, int val)
-{
-	int		ret;
-
-	ret = 0;
+	htag_cond = val != 0 && (fs->flags & F_HTAG);
 	if (fs->precision != DEFAULT)
 	{
 		if (fs->precision >= fs->width)
-		{
-			ret += set_x_left_prefix(val, fs, fs->precision, 0);
-			ret += repeate_char(48, fs->precision - size);
-			ft_putstr(s);
-		}
+			ret += put_x(htag_cond, fs->precision - size, 1, s);
 		else if (fs->precision >= size)
 		{
-			ret += set_x_left_prefix(val, fs, fs->precision + size, 0);
-			ft_putstr(s);
-			ret += repeate_char(32, fs->precision);
+			ret += put_x(htag_cond, fs->precision - size, 1, s);
+			ret += put_trailing_spaces(fs, htag_cond, fs->precision);
 		}
 		else
 		{
-			ft_putstr(s);
-			ret += set_x_left_prefix(val, fs, size, 0);
+			ret += put_x(htag_cond, fs->precision - size, 0, s);
+			ret += put_trailing_spaces(fs, fs->flags & F_HTAG, size);
 		}
+		return (ret + size);
 	}
-	else
-	{
-		ret += set_x_left_prefix(val, fs, size, DEFAULT);
-		ft_putstr(s);
-		if (val != 0 && (fs->flags & F_HTAG))
-			ret += repeate_char(32, fs->width - size - 2) + 2;
-		else
-			ret += repeate_char(32, fs->width - size);
-	}
-	/*ret = repeate_char(48, fs->precision - size);
-	  if (fs->precision >= fs->width)
-	  ft_putstr(s);
-	  else if (fs->precision > size)
-	  {
-	  ft_putstr(s);
-	  ret += repeate_char(32, fs->width - fs->precision);
-	  }
-	  else
-	  {
-	  ft_putstr(s);
-	  ret += repeate_char(32, fs->width - size);
-	  }*/
+	ret += put_x(htag_cond, fs->precision - size, 0, s);
+	ret += put_trailing_spaces(fs, htag_cond, size);
 	return (ret + size);
 }
 
@@ -146,16 +74,12 @@ static char	*get_s(unsigned long long int val, t_fs *fs)
 	if (val == 0)
 	{
 		if (fs->precision == 0)
-			s = ft_strdup("");
-		else
-			s = ft_strdup("0");
-		return (s);
+			return (ft_strdup(""));
 	}
-	s = ft_itoa_base_u(val, 16, 0);
-	return (s);
+	return (ft_itoa_base_u(val, 16, 0));
 }
 
-int		print_x(t_fs *fs, va_list ap)
+int			print_x(t_fs *fs, va_list ap)
 {
 	unsigned long long int	val;
 	char					*s;
@@ -182,4 +106,3 @@ int		print_x(t_fs *fs, va_list ap)
 	free(s);
 	return (ret);
 }
-

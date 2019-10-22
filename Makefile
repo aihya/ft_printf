@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/10/18 14:03:49 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/22 18:38:12 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_NAME =	ft_printf.c \
 			print_p.c \
 			print_o.c \
 			print_x.c \
+			print_x_tools.c
 
 OBJ_NAME =	$(SRC_NAME:.c=.o)
 

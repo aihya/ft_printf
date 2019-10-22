@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 16:59:11 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/13 13:19:37 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 18:38:53 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		print_o_on_left(t_fs *fs, char *s, int size)
 	return (ret + size);
 }
 
-char	*get_s(unsigned long long int val, t_fs *fs)
+static char	*get_s(unsigned long long int val, t_fs *fs)
 {
 	char	*s;
 	char	*tmp;
