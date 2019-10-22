@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 20:41:54 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/22 18:56:52 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 21:38:47 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,37 @@ static int	print_x_on_right(t_fs *fs, char *s, int size, int val)
 	return (ret + size);
 }
 
+static void	init_args(int args[2], int htag_condition, int size)
+{
+	args[0] = htag_condition;
+	args[1] = size;
+}
+
 static int	print_x_on_left(t_fs *fs, char *s, int size, int val)
 {
 	int		ret;
-	int		htag_cond;
+	int		args[2];
 
 	ret = 0;
-	htag_cond = val != 0 && (fs->flags & F_HTAG);
+	init_args(args, val != 0 && (fs->flags & F_HTAG), fs->precision - size);
 	if (fs->precision != DEFAULT)
 	{
 		if (fs->precision >= fs->width)
-			ret += put_x(htag_cond, fs->precision - size, 1, s);
+			ret += put_x(args, fs, 1, s);
 		else if (fs->precision >= size)
 		{
-			ret += put_x(htag_cond, fs->precision - size, 1, s);
-			ret += put_trailing_spaces(fs, htag_cond, fs->precision);
+			ret += put_x(args, fs, 1, s);
+			ret += put_trailing_spaces(fs, args[0], fs->precision);
 		}
 		else
 		{
-			ret += put_x(htag_cond, fs->precision - size, 0, s);
+			ret += put_x(args, fs, 0, s);
 			ret += put_trailing_spaces(fs, fs->flags & F_HTAG, size);
 		}
 		return (ret + size);
 	}
-	ret += put_x(htag_cond, fs->precision - size, 0, s);
-	ret += put_trailing_spaces(fs, htag_cond, size);
+	ret += put_x(args, fs, 0, s);
+	ret += put_trailing_spaces(fs, args[0], size);
 	return (ret + size);
 }
 
@@ -72,7 +78,7 @@ static char	*get_s(unsigned long long int val, t_fs *fs)
 	char	*tmp;
 
 	if (val == 0 && fs->precision == 0)
-			return (ft_strdup(""));
+		return (ft_strdup(""));
 	return (ft_itoa_base_u(val, 16, fs->specifier == 'x' ? 0 : 1));
 }
 

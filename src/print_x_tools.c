@@ -6,21 +6,25 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 18:27:40 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/22 19:01:30 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 21:38:37 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int		put_x(int htag_condition, int size, int add_zeros, char *s)
+int		put_x(int *params, t_fs *fs, int add_zeros, char *s)
 {
 	int		ret;
+	int		htag_condition;
+	int		size;
 
 	ret = 0;
+	htag_condition = params[0];
+	size = params[1];
 	if (htag_condition)
 	{
 		ret += 2;
-		ft_putstr("0x"); // BREAK POINT
+		ft_putstr(fs->specifier == 'x' ? "0x" : "0X");
 	}
 	if (add_zeros)
 		ret += repeate_char(48, size);

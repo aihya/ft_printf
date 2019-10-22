@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 16:59:11 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/22 18:52:07 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 21:46:39 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	prefix(char *str, char *prefix)
 	ft_putstr(str);
 }
 
-int		print_o_on_right(t_fs *fs, char *s, int size)
+static int		print_o_on_right(t_fs *fs, char *s, int size)
 {
 	int		ret;
 
@@ -50,7 +50,7 @@ int		print_o_on_right(t_fs *fs, char *s, int size)
 	return (ret + size);
 }
 
-int		print_o_on_left(t_fs *fs, char *s, int size)
+static int		print_o_on_left(t_fs *fs, char *s, int size)
 {
 	int		ret;
 
@@ -74,6 +74,7 @@ static char	*get_s(unsigned long long int val, t_fs *fs)
 {
 	char	*s;
 	char	*tmp;
+	int		base;
 
 	if (val == 0)
 	{
@@ -83,7 +84,10 @@ static char	*get_s(unsigned long long int val, t_fs *fs)
 			s = ft_strdup("0");
 	}
 	else
-		s = ft_itoa_base_u(val, 8, 0);	
+	{
+		base = fs->specifier == 'o' ? 8 : 10;
+		s = ft_itoa_base_u(val, base, 0);	
+	}
 	if (fs->flags & F_HTAG)
 	{
 		tmp = ft_strjoin("0", s);
@@ -94,7 +98,7 @@ static char	*get_s(unsigned long long int val, t_fs *fs)
 	return (s);
 }
 
-int		print_o(t_fs *fs, va_list ap)
+int		print_uo(t_fs *fs, va_list ap)
 {
 	unsigned long long int	val;
 	char					*s;

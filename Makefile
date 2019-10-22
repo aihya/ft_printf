@@ -6,7 +6,7 @@
 #    By: aihya <aihya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/30 10:17:50 by aihya             #+#    #+#              #
-#    Updated: 2019/10/22 18:38:12 by aihya            ###   ########.fr        #
+#    Updated: 2019/10/22 21:46:20 by aihya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_NAME =	ft_printf.c \
 			print_c.c \
 			print_s.c \
 			print_p.c \
-			print_o.c \
+			print_uo.c \
 			print_x.c \
 			print_x_tools.c
 

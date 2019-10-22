@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 21:25:43 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/12 15:53:16 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 21:47:07 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int		interpret_format(const char *format, va_list ap)
 				size += print_s(fs, ap);
 			else if (fs->specifier == 'p')
 				size += print_p(fs, ap);
-			else if (fs->specifier == 'o')
-				size += print_o(fs, ap);
-			else if (fs->specifier == 'x')
+			else if (fs->specifier == 'o' || fs->specifier == 'u')
+				size += print_uo(fs, ap);
+			else if (fs->specifier == 'x' || fs->specifier == 'X')
 				size += print_x(fs, ap);
 			i += 1 + fs->size;
 		}

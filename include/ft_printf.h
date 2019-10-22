@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 21:29:07 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/22 20:54:47 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 21:46:48 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int		repeate_char(char c, int i);
 int		print_s(t_fs *fs, va_list ap);
 int		print_c(t_fs *fs, va_list ap);
 int		print_p(t_fs *fs, va_list ap);
-int		print_o(t_fs *fs, va_list ap);
+int		print_uo(t_fs *fs, va_list ap);
 int		print_x(t_fs *fs, va_list ap);
 int		print_non_specifier(t_fs *fs, int c);
-int		put_x(int htag_condition, int size, int add_zeros, char *s);
+int		put_x(int *params, t_fs *fs, int add_zeros, char *s);
 int		put_trailing_spaces(t_fs *fs, int condition, int comp_target);
 int		set_x_right_prefix(int val, t_fs *fs, int comp_target, int dp);
 
