@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 20:41:54 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/22 18:40:13 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 18:56:52 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,9 @@ static char	*get_s(unsigned long long int val, t_fs *fs)
 	char	*s;
 	char	*tmp;
 
-	if (val == 0)
-	{
-		if (fs->precision == 0)
+	if (val == 0 && fs->precision == 0)
 			return (ft_strdup(""));
-	}
-	return (ft_itoa_base_u(val, 16, 0));
+	return (ft_itoa_base_u(val, 16, fs->specifier == 'x' ? 0 : 1));
 }
 
 int			print_x(t_fs *fs, va_list ap)

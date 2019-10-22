@@ -6,7 +6,7 @@
 /*   By: aihya <aihya@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 18:27:40 by aihya             #+#    #+#             */
-/*   Updated: 2019/10/22 18:40:11 by aihya            ###   ########.fr       */
+/*   Updated: 2019/10/22 19:01:30 by aihya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		put_x(int htag_condition, int size, int add_zeros, char *s)
 	if (htag_condition)
 	{
 		ret += 2;
-		ft_putstr("0x");
+		ft_putstr("0x"); // BREAK POINT
 	}
 	if (add_zeros)
 		ret += repeate_char(48, size);
@@ -49,13 +49,13 @@ int		set_x_right_prefix(int val, t_fs *fs, int comp_target, int dp)
 	{
 		if (dp == DEFAULT && (fs->flags & F_ZERO))
 		{
-			ft_putstr("0x");
+			ft_putstr(fs->specifier == 'x' ? "0x" : "0X");
 			ret += repeate_char(48, fs->width - comp_target - 2) + 2;
 		}
 		else
 		{
 			ret += repeate_char(32, fs->width - comp_target - 2) + 2;
-			ft_putstr("0x");
+			ft_putstr(fs->specifier == 'x' ? "0x" : "0X");
 		}
 	}
 	else
